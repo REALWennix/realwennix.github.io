@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Martin Rosič</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="app">
+      <nav class="cnavbar" v-if="!isMobile">
+        <ul>
+          <li>
+            <a @click="scrollToSection('#about')">ABOUT</a>
+          </li>
+          <li>
+            <a @click="scrollToSection('#projects')">PROJECTS</a>
+          </li>
+          <li>
+            <a @click="scrollToSection('#portfolio')">PORTFOLIO</a>
+          </li>
+          <li>
+            <a @click="scrollToSection('#skills')">SKILLS</a>
+          </li>
+          <li>
+            <a @click="scrollToSection('#contact')">CONTACT</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-navbar" v-if="isMobile">
+        <button class="hamburger" @click="toggleSidebar">☰</button>
+        <div class="sidebar" v-if="isSidebarOpen">
+          <ul>
+            <li>
+              <a @click="scrollToSection('#about')">ABOUT</a>
+            </li>
+            <li>
+              <a @click="scrollToSection('#projects')">PROJECTS</a>
+            </li>
+            <li>
+              <a @click="scrollToSection('#portfolio')">PORTFOLIO</a>
+            </li>
+            <li>
+              <a @click="scrollToSection('#skills')">SKILLS</a>
+            </li>
+            <li>
+              <a @click="scrollToSection('#contact')">CONTACT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <section id="hero" class="hero">
+        <div class="carouselcontainer">
+          <!-- Bootstrap Carousel -->
+          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Slides (generated with Vue.js) -->
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="(slide, index) in slides" :class="{ active: index === 0 }">
+                <!-- Check if the slide is an image or video -->
+                <div v-if="slide.type === 'image'">
+                  <img :src="slide.source" class="d-block w-100" :alt="slide.alt">
+                </div>
+                <div v-else-if="slide.type === 'video'">
+                  <video controls width="100%" height="100%">
+                    <source :src="slide.source" type="video/mp4"> Your browser does not support the video tag.
+                  </video>
+                </div>
+                <!-- Caption and Description -->
+                <div class="carousel-caption">
+                  <h3>{{ slide.caption }}</h3>
+                  <p>{{ slide.description }}</p>
+                </div>
+              </div>
+            </div>
+            <!-- Controls -->
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about-section">
+        <div class="container">
+          <h2 class="about-title">ABOUT ME</h2>
+          <div class="about-grid">
+            <div class="about-tile color-tile"></div>
+            <div class="about-tile text-tile">
+              <h3>ABOUT ME</h3>
+              <p>Hello, my name is Martin, and I am from the Czech Republic. I am currently a student at SPSE Jecna in my third year. I am 18 years old. </p>
+            </div>
+            <div class="about-tile color-tile"></div>
+            <div class="about-tile text-tile">
+              <h3>3D ARTIST</h3>
+              <p> I am a professional 3D artist, specializing in the creation of high-quality 3D models and textures. My artistic work enables me to express creativity and add visual value to my art. </p>
+            </div>
+            <div class="about-tile color-tile"></div>
+            <div class="about-tile text-tile">
+              <h3>GAME DEVELOPER</h3>
+              <p> I am also involved in video game development, which allows me to bring my concepts to life through entertaining and innovative gaming projects. My work is focused on inspiring and providing enjoyment for players and users. </p>
+            </div>
+            <div class="about-tile color-tile"></div>
+            <div class="about-tile text-tile">
+              <h3>PROGRAMMER</h3>
+              <p> In addition, I have substantial programming experience, with a focus on the creation of graphic applications, interactive games, and technological improvements. My primary goal is to create sophisticated projects that perfectly mix technical prowess with artistic expression. </p>
+            </div>
+            <div class="about-tile color-tile"></div>
+          </div>
+        </div>
+      </section>
+      <section id="projects" class="projects-section">
+        <h2 class="section-title">PROJECTS</h2>
+        <div class="carcontainer">
+          <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item" v-for="(project, index) in cards" :class="{ active: index === 0 }">
+                <div class="card" @click="expandCard(index)">
+                  <h3 class="card-title">{{ project.title }}</h3>
+                  <p class="card-description">{{ project.description }}</p>
+                  <p class="card-date">{{ project.date }}</p>
+                  <div class="cardbtn-box">
+                    <button class="btn primary" type="button">
+                      <div class="label">
+                        <span class="hover-effect"></span>
+                        <span class="label-text">Learn More</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#projectCarousel" role="button" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#projectCarousel" role="button" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </a>
+          </div>
+          <div class="modal fade" :class="{ 'show': isModalOpen }" tabindex="-1" role="dialog" aria-labelledby="projectDetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="projectDetailsModalLabel">{{ selectedCard ? selectedCard.title : '' }}</h5>
+                </div>
+                <div class="modal-body">
+                  <p class="modal-description">{{ selectedCard ? selectedCard.description : '' }}</p>
+                  <p v-if="selectedCard && selectedCard.modalContent" class="modal-additional-info">
+                    <strong>Additional Info:</strong> {{ selectedCard.modalContent.additionalInfo }}
+                  </p>
+                  <p v-if="selectedCard && selectedCard.modalContent" class="modal-team-members">
+                    <strong>Team Members:</strong> {{ selectedCard.modalContent.teamMembers }}
+                  </p>
+                  <p class="modal-date">{{ selectedCard ? selectedCard.date : '' }}</p>
+                  <div class="modalbtn-box">
+                    <button class="btn outline red" type="button" @click="closeCard">
+                      <div class="label">
+                        <span class="hover-effect"></span>
+                        <span class="label-text">CLOSE</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="portfolio" class="portfolio-section">
+        <h2 class="portfolio-title">PORTFOLIO</h2>
+        <div class="portfolio-grid">
+          <div class="portfolio-item" v-for="(item, index) in gridData" :key="index">
+            <div v-if="item.type === 'image'" class="portfolio-image">
+              <img :src="item.source" :alt="item.shortTitle" />
+              <p class="portfolio-text">{{ item.shortTitle }}</p>
+            </div>
+            <div v-else>
+              <div class="portfolio-color-tile" :style="{ backgroundColor: color }"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="skills" class="skills-section">
+        <div class="container">
+          <h2 class="section-title">SKILLS</h2>
+          <div class="skills-grid">
+            <div class="skill-column" v-for="area in skillAreas" :key="area.id">
+              <h3>{{ area.title }}</h3>
+              <div class="skill-section" v-for="software in area.skills" :key="software.title">
+                <div class="software-rating">
+                  <h4>{{ software.title }}</h4>
+                  <ul>
+                    <li v-for="skillItem in software.items" :key="skillItem.name">
+                      <div class="rating-bar">
+                        <div class="skewed-rectangles">
+                          <div class="skewed-rectangle" v-for="i in 5" :key="i" :class="{ filled: i <= skillItem.rating }">
+                          </div>
+                        </div>
+                        <div class="skill-name">{{ skillItem.name }}</div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="contact-section">
+        <div class="container">
+          <h2 class="section-title">CONTACT</h2>
+          <div class="contact-info">
+            <div class="contact-grid">
+              <div v-for="contact in contacts" :key="contact.id" class="contact-item">
+                <strong>{{ contact.label }}:</strong>
+                <a :href="contact.link" :target="contact.target" :rel="contact.rel">{{ contact.linkText }}</a>
+                <div class="contact-button">
+                  <button class="btn primary" @click="openLink(contact.link)">
+                    <a :href="contact.link"></a>
+                    <div class="label">
+                      <span class="hover-effect"></span>
+                      <span class="label-text">{{ contact.buttonText }}</span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer>
+        <div class="container">
+          <p>&copy; 2023 Martin Rosič. All rights reserved.</p>
+          <p>Email: <a href="mailto:rosmartin63@gmail.com">rosmartin63@gmail.com</a>
+          </p>
+        </div>
+      </footer>
+      <div id="btt-wrapper">
+        <button id="back-to-top" @click="scrollToTop" v-if="shouldShowBackToTop" class="btn outline" type="button">
+          <div class="label">
+            <span class="hover-effect"></span>
+            <span class="label-text">Back To Top</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          isMobile: false,
+          isSidebarOpen: false,
+          isModalOpen: false,
+          selectedCard: null,
+          shouldShowBackToTop: false,
+          skillAreas: [{
+            id: 1,
+            title: '3D Artist',
+            skills: [{
+              title: '3ds Max',
+              items: [{
+                name: 'Rigging',
+                rating: 4
+              }, {
+                name: 'Modeling',
+                rating: 3
+              }, {
+                name: 'Animation',
+                rating: 5
+              }, {
+                name: 'Lighting',
+                rating: 4
+              }, {
+                name: 'Retopology',
+                rating: 4
+              }, {
+                name: 'Texturing',
+                rating: 3
+              }, {
+                name: 'Rendering',
+                rating: 5
+              }, {
+                name: 'Particle Systems',
+                rating: 4
+              }, {
+                name: 'Scripting',
+                rating: 5
+              }, ],
+            }, {
+              title: 'Autodesk Maya',
+              items: [{
+                name: 'UV Unwrap',
+                rating: 4
+              }, {
+                name: 'Retopology',
+                rating: 4
+              }, {
+                name: 'Texturing',
+                rating: 3
+              }, {
+                name: 'Lighting',
+                rating: 3
+              }, {
+                name: 'Rigging',
+                rating: 4
+              }, {
+                name: 'Animation',
+                rating: 4
+              }, {
+                name: 'Rendering',
+                rating: 3
+              }, {
+                name: 'Shading',
+                rating: 4
+              }, {
+                name: 'Dynamics',
+                rating: 3
+              }, {
+                name: 'XGen',
+                rating: 4
+              }, {
+                name: 'Bifrost',
+                rating: 4
+              }, ],
+            }, {
+              title: 'Houdini VFX',
+              items: [{
+                  name: 'Particle Simulation',
+                  rating: 4
+                }, {
+                  name: 'Fluid Simulation',
+                  rating: 4
+                }, {
+                  name: 'PyroFX',
+                  rating: 3
+                }, {
+                  name: 'Procedural Modeling',
+                  rating: 4
+                }, {
+                  name: 'VEX Scripting',
+                  rating: 4
+                }, {
+                  name: 'Rigid Body Dynamics',
+                  rating: 4
+                }, {
+                  name: 'Cloth Simulation',
+                  rating: 3
+                }, {
+                  name: 'Crowd Simulation',
+                  rating: 4
+                }, {
+                  name: 'Terrain Generation',
+                  rating: 4
+                }, {
+                  name: 'Volume Modeling',
+                  rating: 3
+                }, {
+                  name: 'Vellum',
+                  rating: 4
+                }, // Added with a rating of 4
+                {
+                  name: 'Wire and Cable Simulation',
+                  rating: 3
+                }, {
+                  name: 'Advanced Shading and Texturing',
+                  rating: 4
+                }, {
+                  name: 'Simulation Optimization',
+                  rating: 4
+                }, {
+                  name: 'VFX Compositing',
+                  rating: 3
+                },
+              ],
+            }, {
+              title: 'ZBrush',
+              items: [{
+                name: 'Sculpting',
+                rating: 4
+              }, {
+                name: 'Texturing',
+                rating: 3
+              }, {
+                name: 'Digital Painting',
+                rating: 4
+              }, {
+                name: 'Character Modeling',
+                rating: 4
+              }, {
+                name: 'ZModeler',
+                rating: 3
+              }, {
+                name: 'Dynamesh',
+                rating: 4
+              }, {
+                name: 'Fibermesh',
+                rating: 3
+              }, {
+                name: 'ZSpheres',
+                rating: 4
+              }, {
+                name: 'Retopology',
+                rating: 4
+              }, ],
+            }, {
+              title: 'Substance Painter',
+              items: [{
+                name: 'Texture Painting',
+                rating: 4
+              }, {
+                name: 'Material Authoring',
+                rating: 4
+              }, {
+                name: 'PBR Workflow',
+                rating: 4
+              }, {
+                name: 'Smart Materials',
+                rating: 3
+              }, {
+                name: 'Masking and Layers',
+                rating: 4
+              }, {
+                name: 'Exporting Textures',
+                rating: 4
+              }, {
+                name: 'Baking Maps',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Substance Designer',
+              items: [{
+                name: 'Procedural Texture Creation',
+                rating: 4
+              }, {
+                name: 'Material Graphs',
+                rating: 4
+              }, {
+                name: 'Substance Automation',
+                rating: 3
+              }, {
+                name: 'Texture Export',
+                rating: 4
+              }, {
+                name: 'Shader Generation',
+                rating: 4
+              }, {
+                name: 'Advanced Node Editing',
+                rating: 4
+              }, {
+                name: 'PBR Material Creation',
+                rating: 4
+              }, ],
+            }, {
+              title: 'Blender',
+              items: [{
+                name: 'Modeling',
+                rating: 4
+              }, {
+                name: 'Texturing',
+                rating: 3
+              }, {
+                name: 'Animation',
+                rating: 4
+              }, {
+                name: 'Rigging',
+                rating: 3
+              }, {
+                name: 'Rendering',
+                rating: 4
+              }, {
+                name: 'Fluid Simulation',
+                rating: 3
+              }, {
+                name: 'Video Editing',
+                rating: 3
+              }, ],
+            }, ],
+          }, {
+            id: 2,
+            title: 'Programming',
+            skills: [{
+              title: 'C++',
+              items: [{
+                name: 'Game Development',
+                rating: 4
+              }, {
+                name: 'Algorithms',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Python',
+              items: [{
+                name: 'Web Development',
+                rating: 4
+              }, {
+                name: 'Data Analysis',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Java',
+              items: [{
+                name: 'Android App Development',
+                rating: 4
+              }, {
+                name: 'Enterprise Software',
+                rating: 3
+              }, ],
+            }, {
+              title: 'JavaScript',
+              items: [{
+                name: 'Front-End Development',
+                rating: 4
+              }, {
+                name: 'Node.js',
+                rating: 3
+              }, ],
+            }, {
+              title: 'SQL',
+              items: [{
+                name: 'Database Management',
+                rating: 4
+              }, {
+                name: 'Query Optimization',
+                rating: 3
+              }, ],
+            }, ],
+          }, {
+            id: 3,
+            title: 'Game Development',
+            skills: [{
+              title: 'Unity',
+              items: [{
+                name: '2D Game Development',
+                rating: 4
+              }, {
+                name: '3D Game Development',
+                rating: 4
+              }, {
+                name: 'Physics Simulation',
+                rating: 3
+              }, {
+                name: 'AI Programming',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Unreal Engine',
+              items: [{
+                name: '3D Game Development',
+                rating: 4
+              }, {
+                name: 'Visual Scripting',
+                rating: 3
+              }, {
+                name: 'VR Development',
+                rating: 3
+              }, {
+                name: 'Advanced Materials',
+                rating: 4
+              }, ],
+            }, {
+              title: 'Game Mechanics',
+              items: [{
+                name: 'Level Design',
+                rating: 4
+              }, {
+                name: 'Game Balancing',
+                rating: 4
+              }, {
+                name: 'Player Engagement',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Narrative Design',
+              items: [{
+                name: 'Storytelling',
+                rating: 4
+              }, {
+                name: 'Character Development',
+                rating: 3
+              }, {
+                name: 'Dialogues and Scripting',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Prototyping',
+              items: [{
+                name: 'Paper Prototyping',
+                rating: 4
+              }, {
+                name: 'Interactive Prototyping',
+                rating: 3
+              }, {
+                name: 'User Testing',
+                rating: 3
+              }, ],
+            }, {
+              title: 'User Experience (UX)',
+              items: [{
+                name: 'UI/UX Design',
+                rating: 4
+              }, {
+                name: 'User Research',
+                rating: 3
+              }, {
+                name: 'Usability Testing',
+                rating: 3
+              }, ],
+            }, {
+              title: 'Animations',
+              items: [{
+                name: '2D Animations',
+                rating: 4
+              }, {
+                name: '3D Animations',
+                rating: 3
+              }, {
+                name: 'Character Rigging',
+                rating: 3
+              }, {
+                name: 'Motion Capture (Mocap)',
+                rating: 3
+              }, ],
+            }, ],
+          }, ],
+          slides: [{
+            type: 'image',
+            source: 'LogicBoardRenderr.png',
+            alt: 'ABSTACT LOGIC BOARD RENDER',
+            caption: 'ABSTACT LOGIC BOARD RENDER',
+            description: 'Made using Houdini VFX and Autodesk Maya 2022'
+          }, {
+            type: 'image',
+            source: 'Formula.png',
+            alt: 'Formula 1 custom livery',
+            caption: 'FORMULA 1 CUSTOM LIVERY',
+            description: 'Made using Autodesk Maya 2022 and Adobe substace Painter'
+          }, {
+            type: 'image',
+            source: 'ueMage.webp',
+            alt: 'Unreal engine mage',
+            caption: 'UNREAL ENGINE MAGE ANIMATIONS',
+            description: 'Made in autodesk Maya 2022, 3Ds Max and Houdini VFX'
+          }],
+          cards: [{
+            title: 'Project CounterFire',
+            description: 'Multiplayer Hero-Based FPS shooter in Unreal Engine 5',
+            date: 'Start of production: 2021-10-23',
+            modalContent: {
+              additionalInfo: 'This is an exciting multiplayer project with advanced graphics.',
+              teamMembers: 'TBA',
+            },
+          }, {
+            title: 'Project A',
+            description: 'Upcoming Singleplayer FPS project',
+            date: 'Start of production: 2024-1-6',
+            modalContent: {
+              additionalInfo: 'An immersive singleplayer FPS game with a captivating storyline.',
+              teamMembers: 'TBA',
+            },
+          }, {
+            title: 'Project L',
+            description: 'Upcoming MMORPG project',
+            date: 'Start of production: 2028-8-17',
+            modalContent: {
+              additionalInfo: 'A massive multiplayer online role-playing game with a vast open world.',
+              teamMembers: 'TBA',
+            },
+          }, ],
+          contacts: [{
+            id: 1,
+            label: 'Email',
+            link: 'mailto:rosmartin63@gmail.com',
+            linkText: 'rosmartin63@gmail.com',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            buttonText: 'Email Me'
+          }, {
+            id: 2,
+            label: 'LinkedIn',
+            link: 'https://www.linkedin.com/in/yourprofile',
+            linkText: 'Your LinkedIn Profile',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            buttonText: 'LinkedIn Profile'
+          }, {
+            id: 3,
+            label: 'Discord',
+            link: 'https://discordapp.com/users/realwennix',
+            linkText: 'realwennix',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            buttonText: 'Discord Profile'
+          }, {
+            id: 4,
+            label: 'GitHub',
+            link: 'https://github.com/yourusername',
+            linkText: 'Your GitHub Profile',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            buttonText: 'GitHub Profile'
+          }, {
+            id: 5,
+            label: 'Instagram',
+            link: 'https://www.instagram.com/realwennix/',
+            linkText: 'realwennix',
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            buttonText: 'Instagram Profile'
+          }],
+          gridData: [],
+          imageSources: ['https://placehold.co/512x512', 'https://placehold.co/512x512', 'https://placehold.co/512x512', 'https://placehold.co/512x512', 'https://placehold.co/512x512', ],
+          color: '#ff4655',
+        },
+        methods: {
+          scrollToSection(sectionId) {
+            const section = document.querySelector(sectionId);
+            if (section) {
+              const navbarHeight = 80;
+              const offsetTop = section.offsetTop;
+              // Smooth scrolling
+              window.scrollTo({
+                top: offsetTop - navbarHeight,
+                behavior: 'smooth',
+              });
+            }
+          },
+          handleScroll() {
+            const currentScrollPosition = window.scrollY;
+            this.shouldShowBackToTop = currentScrollPosition > 200;
+            document.body.classList.add('back-to-top.show');
+            $('#back-to-top').modal('show');
+          },
+          scrollToTop() {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth',
+            });
+          },
+          expandCard(index) {
+            this.selectedCard = this.cards[index];
+            console.log('Opening modal for card:', this.selectedCard);
+            this.isModalOpen = true;
+            document.body.classList.add('modal-open');
+            $('#projectDetailsModal').modal('show');
+          },
+          closeCard() {
+            this.selectedCard = null;
+            this.isModalOpen = false;
+            document.body.classList.remove('modal-open');
+            console.log('Closing modal');
+            $('#projectDetailsModal').modal('hide');
+          },
+          toggleSidebar() {
+            this.isSidebarOpen = !this.isSidebarOpen;
+          },
+          generateGrid() {
+            const gridSize = 3 * 3;
+            const tempImageSources = [...this.imageSources];
+            this.gridData = [];
+            for (let i = 0; i < gridSize; i++) {
+              if (tempImageSources.length > 0) {
+                const randomIndex = Math.floor(Math.random() * tempImageSources.length);
+                const randomImageSource = tempImageSources.splice(randomIndex, 1)[0];
+                this.gridData.push({
+                  type: 'image',
+                  source: randomImageSource,
+                  title: 'Image ' + (i + 1),
+                  shortTitle: 'Short Title ' + (i + 1),
+                });
+              } else {
+                this.gridData.push({
+                  type: 'color',
+                });
+              }
+            }
+            this.shuffleArray(this.gridData);
+          },
+          shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [array[i], array[j]] = [array[j], array[i]];
+            }
+          },
+          openLink(link) {
+            window.open(link, '_blank');
+          }
+        },
+        mounted() {
+          this.generateGrid();
+          if (window.innerWidth <= 768) {
+            this.isMobile = true;
+          }
+          window.addEventListener('resize', () => {
+            this.isMobile = window.innerWidth <= 768;
+          });
+          window.addEventListener('scroll', this.handleScroll);
+        },
+      });
+    </script>
+  </body>
+</html>

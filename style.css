@@ -1,0 +1,978 @@
+@font-face {
+  font-family: "Valorant";
+  src: url("Valorant.otf");
+}
+
+@font-face {
+  font-family: "DIN Next LT Pro Bold";
+  src: url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.eot");
+  src: url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.eot?#iefix")
+        format("embedded-opentype"),
+     url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.woff2")
+        format("woff2"),
+     url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.woff")
+        format("woff"),
+     url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.ttf")
+        format("truetype"),
+     url("//db.onlinewebfonts.com/t/3a88649e176a40a6d80b395ca0ae430d.svg#DIN Next LT Pro Bold")
+        format("svg");
+}
+
+:root {
+  --v-red: #ff4655;
+  --v-white: #ece8e1;
+  --v-black: #0f1923;
+  --v-outline: rgba(236, 232, 225, 0.5);
+}
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  background: rgba(15, 25, 35, 0.65);
+
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.5px);
+  -webkit-backdrop-filter: blur(6.5px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 25, 35, 0.65);
+}
+
+::-webkit-scrollbar-track:hover {
+  background: rgba(15, 25, 35, 0);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(15, 25, 35, 0.65);
+  background: var(--v-red);
+}
+
+html,
+body {
+  font-size: 10px;
+  margin: 0;
+  background-color: var(--v-black);
+  color: var(--v-white);
+  font-family: "Valorant";
+  text-rendering: optimizeLegibility;
+  scrollbar-width: thin;
+  scrollbar-color: #007bff #f1f1f1;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.box {
+  width: 50%;
+}
+
+.logo {
+  fill: var(--v-white);
+}
+
+.betaText {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 400px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 40px;
+}
+
+.btn {
+  font-family: "Valorant", sans-serif !important;
+  font-weight: 400;
+  width: 100%;
+  margin-bottom: 3rem;
+  position: relative;
+  display: block;
+  font-size: 1.9rem;
+  padding: 0.7rem;
+  border: 0;
+  text-transform: uppercase;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--v-white);
+}
+
+.btn:hover {
+  color: var(--v-white);
+}
+
+.btn::before,
+.btn::after {
+  background-color: transparent;
+  content: "";
+  display: block;
+  position: absolute;
+  height: calc(50% - 0.4rem);
+  width: 100%;
+  border: 1px solid var(--v-outline);
+  left: 0;
+}
+
+.btn::before {
+  border-bottom: 0;
+  top: 0;
+}
+
+.btn::after {
+  border-top: 0;
+  bottom: 0;
+}
+
+/* LABEL */
+.btn .label {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+}
+
+.btn .label:before {
+  content: "";
+  height: 100%;
+  display: block;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+}
+
+/* Hover Effect */
+.btn .hover-effect {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 120%;
+  top: 0;
+  left: -5%;
+  z-index: 1;
+  background-color: var(--v-red);
+  transform: translateX(-100%) skew(-10deg);
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.btn:hover .hover-effect {
+  transform: translateX(0) skew(-10deg);
+}
+
+/* Label Text */
+.btn .label-text {
+  position: relative;
+  display: block;
+  padding: 1.9rem 3rem;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.btn .label-text:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 0.6rem;
+  width: 0.6rem;
+  right: 0;
+  bottom: 0;
+  background-color: var(--v-black);
+  transition: background-color 0.2s ease-in;
+}
+
+.btn:hover .label-text:after {
+  background-color: var(--v-white);
+}
+/* OUTLINE BUTTON */
+.btn.outline {
+  color: var(--v-white);
+}
+
+.btn.outline .label::before,
+.btn.outline .label::after {
+  border: 1px solid var(--v-outline);
+}
+
+/* OUTLINE RED BUTTON */
+.btn.outline.red {
+  color: var(--v-red);
+}
+
+.btn.outline.red:hover {
+  color: var(--v-white);
+}
+
+.btn.outline.red .label::before,
+.btn.outline.red .label::after {
+  border-color: var(--v-red);
+}
+/* PRIMARY BUTTON */
+.btn.primary {
+  color: var(--v-black);
+}
+
+.btn.primary .label::before {
+  background-color: var(--v-white);
+}
+
+/* Navbar styles */
+.cnavbar {
+  position: sticky;
+  top: 0;
+  background-color: rgba(15, 25, 35, 0.87);
+  z-index: 100;
+  padding: 1rem 0;
+  box-shadow: 0 24px 30px rgba(0, 0, 0, 0.1);
+  font-family: "Valorant", sans-serif;
+  font-size: 1.5rem;
+  height: 80px;
+  overflow: hidden;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.cnavbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.cnavbar li {
+  margin: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+  transform: skew(-10deg);
+  transition: transform 0.3s ease-out;
+}
+
+.cnavbar a {
+  text-decoration: none;
+  color: var(--v-white);
+  font-weight: bold;
+  display: block;
+  padding: 2rem 2rem;
+  position: relative;
+  transform: skew(10deg);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.cnavbar li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 120%;
+  top: 0;
+  left: -5%;
+  z-index: -1;
+  background-color: var(--v-red);
+  transform: translateX(-100%) skew(-10deg);
+  transition: transform 0.3s ease-out;
+}
+
+.cnavbar li:hover::before {
+  transform: translateX(0) skew(-10deg);
+}
+
+.cnavbar li:hover a {
+  color: var(--v-white);
+  border-color: var(--v-white);
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -220px;
+  width: 100%;
+  height: 100%;
+  font-family: "Valorant", sans-serif !important;
+  background: rgba(15, 25, 35, 0.31);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  transition: right 0.3s ease-in;
+}
+.sidebar.open {
+  right: 0;
+}
+.sidebar a {
+  transition: transform 0.2s ease-in-out;
+}
+.sidebar a:hover {
+  transform: translateX(5px);
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+     display: none;
+  }
+
+  .hamburger {
+     display: block;
+     font-size: 26px !important;
+     color: var(--v-white);
+     padding: 20px;
+     cursor: pointer;
+     position: fixed;
+     z-index: 3;
+     top: 10px;
+     right: 20px;
+  }
+
+  .sidebar {
+     right: 0;
+     z-index: 2;
+  }
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sidebar li {
+  margin: 0;
+  padding: 10px;
+  position: relative;
+  overflow: hidden;
+  width: 100px;
+  min-width: 120px;
+  transform: skew(-10deg);
+  transition: transform 0.3s ease-out;
+}
+
+.sidebar li:hover {
+  color: var(--v-white);
+  border-color: var(--v-white);
+}
+
+.sidebar li:hover::before {
+  transform: translateX(0) skew(-10deg);
+}
+
+.sidebar li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 100%;
+  width: 120%;
+  top: 0;
+  left: -5%;
+  z-index: -1;
+  background-color: var(--v-red);
+  transform: translateX(-100%) skew(-10deg);
+  transition: transform 0.3s ease-out;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: var(--v-white);
+  font-weight: bold;
+  font-size: 2rem;
+  display: block;
+  padding: 1rem 2rem;
+  position: relative;
+  transform: none;
+}
+
+.mobile-navbar button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+/* Hero Sections*/
+.hero {
+  margin-top: -80px;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--v-white);
+  overflow: hidden;
+  font-size: 2rem;
+}
+
+.carousel-inner img {
+  object-fit: cover;
+  object-position: center middle;
+}
+
+.carousel-caption {
+  object-position: center middle;
+  align-items: center;
+  margin-left: 10%;
+  width: 50%;
+  background: rgba(15, 25, 35, 0.32);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  bottom: 10%;
+  font-family: "Valorant", sans-serif !important;
+  color: #ffffff;
+}
+.carousel-caption h3 {
+  font-size: 3rem;
+}
+.carousel-caption p {
+  font-size: 1.5rem;
+}
+
+.about-section {
+  background-color: var(--v-black);
+  padding: 40px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.about-title {
+  font-family: "Valorant", sans-serif !important;
+  font-size: 5rem;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.about-tile {
+  padding: 20px;
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.about-tile h2 {
+  padding: 40px;
+  text-align: center;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-grid {
+  display: grid;
+  font-family: "Valorant", sans-serif !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-content: start;
+}
+
+.about-tile {
+  padding: 20px;
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.color-tile {
+  background-color: var(--v-red);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-tile {
+  background-color: var(--v-black);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--v-white);
+}
+
+.about-tile h3 {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.about-tile p {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.section-title {
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  padding-bottom: 50px;
+  justify-content: center;
+}
+
+.projects-section {
+  padding: 60px 0;
+  background-color: var(--v-black);
+  font-family: "Valorant", sans-serif !important;
+  text-align: center;
+  height: auto;
+  z-index: 1;
+}
+
+.projects-section h2 {
+  font-family: "Valorant", sans-serif !important;
+  font-size: 5rem;
+  padding-bottom: 20px;
+}
+
+.carcontainer {
+  padding-left: 20%;
+  padding-right: 20%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  min-height: 400px;
+}
+
+.card-container {
+  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 20%;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+}
+.card {
+  background-color: var(--v-black);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--v-white);
+  transform: scale(1);
+  transition: transform 0.2s, background-color 0.2s;
+  position: relative;
+  box-shadow: 0 4px 80px rgba(0, 0, 0, 0.1);
+  height: 500px;
+  max-height: 1500px;
+}
+
+.card h3 {
+  font-size: 4rem;
+}
+
+.card p {
+  font-size: 2rem;
+}
+
+.card:hover {
+  transform: scale(0.97);
+  background-color: rgba(13, 22, 31, 0.9);
+  border-radius: 2px;
+  border-color: var(--v-red);
+}
+
+.cardbtn-box {
+  margin-top: 20%;
+  padding-left: 70px;
+  padding-right: 70px;
+}
+
+/* Modal */
+.modal {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+  color: var(--v-black);
+}
+
+.modal.show {
+  display: block;
+}
+
+.modal-dialog {
+  max-width: 800px;
+  color: var(--v-black);
+  width: 500px;
+}
+
+.modal-content {
+  background-color: var(--v-black);
+  color: var(--v-white);
+  border: none;
+}
+
+.modal-header {
+  border: none;
+}
+
+.modal-title {
+  color: var(--v-white);
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.modal-description {
+  font-size: 2.5vh;
+  margin-bottom: 20px;
+}
+
+.modal-date {
+  font-size: 1.8rem;
+}
+
+.modal-additional-info {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.modal-team-members {
+  font-size: 2rem;
+  margin-top: 10px;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.modalbtn-box {
+  padding-top: 20px;
+  margin: 20px;
+  text-align: center;
+  bottom: 0;
+}
+
+.modalbtn-box button {
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+#portfolio {
+  background-color: var(--v-black);
+  text-align: center;
+  z-index: 1;
+  padding: 60px;
+}
+
+.portfolio-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.portfolio-title {
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  font-size: 5rem;
+  justify-content: center;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.portfolio-item {
+  text-align: center;
+  width: 256px;
+  height: 256px;
+  position: relative;
+}
+
+.portfolio-color-tile {
+  width: 256px;
+  height: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-image {
+  position: relative;
+}
+
+.portfolio-image img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.portfolio-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 25, 35, 0.32);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  padding: 5px;
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  font-size: 2rem;
+}
+
+/* Add styles for the Skills section */
+#skills {
+  background-color: var(--v-black);
+  text-align: center;
+  z-index: 1;
+  padding: 70px;
+}
+
+.skills-section {
+  padding: 80px 0;
+}
+
+.section-title {
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  font-size: 5rem;
+  justify-content: center;
+}
+
+.skills-grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.skill-column {
+  flex: 1;
+  margin: 0 15px;
+}
+
+.skill-section {
+  margin: 20px 0;
+}
+
+.skill-column h3 {
+  font-size: 3rem;
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  margin: 0;
+}
+
+.skill-section h4 {
+  font-size: 2rem;
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  margin: 15px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.software-rating {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.skill-name {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  text-align: Left;
+  font-family: "Valorant", sans-serif !important;
+  margin-left: 20px;
+  width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating-bar {
+  display: flex;
+  align-items: center;
+}
+
+.skewed-rectangles {
+  display: flex;
+}
+
+.skewed-rectangle {
+  width: 20px;
+  height: 20px;
+  background-color: var(--v-white);
+  transform: skew(-20deg);
+  margin-right: 5px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.skewed-rectangle.filled {
+  background-color: var(--v-red);
+  box-shadow: 0 0 5px 2px rgba(255, 70, 85, 0.15);
+}
+
+#contact {
+  background-color: var(--v-black);
+  text-align: center;
+  padding: 80px;
+  position: relative;
+}
+
+.contact-section {
+  padding: 40px 0;
+  text-align: center;
+}
+
+.contact-section .section-title {
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  margin-top: 30px;
+  padding-bottom: 20px;
+  font-size: 5rem;
+  justify-content: center;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+}
+
+.contact-item {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-info p {
+  margin: 20px 0;
+}
+
+.contact-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-info li {
+  display: flex;
+  font-size: 1.4rem;
+  align-items: center;
+}
+
+.contact-info strong {
+  margin-right: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: none;
+}
+
+.contact-button {
+  display: inline-flex;
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.contact-button {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-info a {
+  display: none;
+}
+.contact-info a img {
+  width: 32px;
+  display: none;
+  height: 32px;
+  margin-top: 10px;
+  transition: transform 0.2s;
+}
+
+footer {
+  background-color: var(--v-black);
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.363) inset;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: none;
+}
+footer p {
+  text-align: center;
+  font-family: "Valorant", sans-serif !important;
+  font-size: 1.1rem;
+  justify-content: center;
+}
+
+footer p:first-child {
+  margin-bottom: 5px;
+}
+
+footer p:last-child {
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+#btt-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-width: 200px;
+}
+
+#back-to-top {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  z-index: 5000;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 100%;
+}
+
+#back-to-top.show {
+  display: block;
+}
